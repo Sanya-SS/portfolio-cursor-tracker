@@ -1,0 +1,255 @@
+/* ============================================================
+   Luxury Portfolio Hero — global styles
+   Background is matched to the video's exact color: #EC0C08.
+   NOTE: no perspective / rotateX / rotateY anywhere. The page and
+   character body stay rock solid; only the pre-rendered head frames change.
+   ============================================================ */
+
+:root {
+  --bg: #df1913;
+  --white: #ffffff;
+  --ink: #1a0202;
+  --sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --script: "Dancing Script", cursive;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--sans);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Hide the native cursor when the custom one is active (fine pointers only). */
+body.has-custom-cursor,
+body.has-custom-cursor * {
+  cursor: none !important;
+}
+
+/* ---------- hero shell ---------- */
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* full-viewport canvas, cover fit */
+.character-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: block;
+  object-fit: cover;
+  background: var(--bg);
+  z-index: 0;
+}
+
+/* ---------- preloader ---------- */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+}
+.preloader-bar {
+  width: min(240px, 50vw);
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+}
+.preloader-bar span {
+  display: block;
+  height: 100%;
+  background: #fff;
+  transition: width 0.15s ease;
+}
+
+/* ---------- floating frosted nav pill ---------- */
+.nav-pill {
+  position: fixed;
+  top: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+}
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  border-radius: 999px;
+  transition: background 0.25s ease, opacity 0.25s ease;
+  opacity: 0.9;
+}
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--bg);
+  opacity: 1;
+}
+.nav-sep {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ---------- hero copy, bottom-left ---------- */
+.hero-copy {
+  position: fixed;
+  left: clamp(24px, 5vw, 72px);
+  bottom: clamp(32px, 6vh, 68px);
+  z-index: 20;
+  max-width: 380px;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.28);
+}
+.hero-greet {
+  font-size: clamp(14px, 1.4vw, 18px);
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  opacity: 0.92;
+  margin-bottom: 2px;
+}
+.hero-name {
+  font-family: var(--script);
+  font-weight: 700;
+  font-size: clamp(64px, 9vw, 132px);
+  line-height: 0.9;
+  margin: 2px 0 16px;
+  /* subtle soft drop shadow */
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+.hero-bio {
+  max-width: 340px;
+  font-size: clamp(13px, 1.05vw, 15px);
+  font-weight: 300;
+  line-height: 1.65;
+  opacity: 0.94;
+  margin-bottom: 26px;
+}
+
+/* ---------- buttons ---------- */
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 0.28s ease, box-shadow 0.28s ease, color 0.28s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn-solid {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+}
+.btn-solid:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+.btn-solid svg {
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.btn-solid:hover svg {
+  transform: translateX(4px);
+}
+.btn-ghost {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #fff;
+}
+
+/* ---------- custom magnetic cursor ---------- */
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.9),
+    0 0 28px rgba(255, 255, 255, 0.5);
+}
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.25);
+  transition: opacity 0.2s ease;
+}
+
+/* Touch / coarse pointers: show native cursor, keep everything usable. */
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-name {
+    font-size: clamp(56px, 18vw, 96px);
+  }
+  .hero-copy {
+    max-width: 88vw;
+  }
+}
