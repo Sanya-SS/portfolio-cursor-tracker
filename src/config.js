@@ -19,10 +19,15 @@ export const LERP_FACTOR = 0.26;
 // the upper portion. object-fit: cover crops, so we anchor to sensible values.
 export const FACE_CENTER = { x: 0.5, y: 0.42 };
 
+// Vite injects import.meta.env.BASE_URL (e.g. "/portfolio-cursor-tracker/" in
+// production, "/" in dev). Prefix runtime asset URLs with it so frames resolve
+// correctly on GitHub Pages. BASE_URL always ends with a slash.
+const BASE = import.meta.env.BASE_URL;
+
 // Build the list of frame URLs (served from public/).
 export const FRAME_URLS = Array.from(
   { length: FRAME_COUNT },
-  (_, i) => `/frames/frame_${String(i).padStart(2, "0")}.webp`
+  (_, i) => `${BASE}frames/frame_${String(i).padStart(2, "0")}.webp`
 );
 
-export const CENTER_URL = "/frames/center.webp";
+export const CENTER_URL = `${BASE}frames/center.webp`;
