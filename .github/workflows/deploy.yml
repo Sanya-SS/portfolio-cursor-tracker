@@ -1,0 +1,38 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    # Run workflow on pushing or merging a pull request to master branch
+    branches: [ "main" ] 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write      # allow publishing to GitHub Pages
+      id-token: write   # verify deployment source
+
+    steps:
+      # Get latest code
+      - uses: actions/checkout@v4
+
+      # Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # Install dependencies and build
+      - run: npm install
+      - run: npm run build
+
+      # Upload build folder (dist) as artifact
+      - name: Upload build output
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist # path to build output folder
+
+      # Deploy to GitHub Pages
+      - name: Deploy
+        uses: actions/deploy-pages@v4
